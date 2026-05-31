@@ -31,13 +31,14 @@ export default function Background({ cubeConfig }: BackgroundProps) {
       <div className="bg-orb bg-orb-3" />
       <motion.div className="absolute inset-0" style={{ background: spotlight }} />
 
-      <div className="absolute inset-0" style={{ opacity: 0.55, filter: 'blur(1.2px)' }}>
+      <div className="absolute inset-0">
         <Suspense fallback={null}>
           <CubeScene
             count={cubeConfig.count}
             speedMult={cubeConfig.speedMult}
             rotationMult={cubeConfig.rotationMult}
             scaleMult={cubeConfig.scaleMult}
+            debug={cubeConfig.debug}
           />
         </Suspense>
       </div>

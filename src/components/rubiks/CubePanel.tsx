@@ -6,6 +6,7 @@ export interface CubeConfig {
   speedMult: number
   rotationMult: number
   scaleMult: number
+  debug: boolean
 }
 
 export const DEFAULT_CUBE_CONFIG: CubeConfig = {
@@ -13,6 +14,7 @@ export const DEFAULT_CUBE_CONFIG: CubeConfig = {
   speedMult: 1,
   rotationMult: 1,
   scaleMult: 1,
+  debug: false,
 }
 
 interface SliderProps {
@@ -110,6 +112,14 @@ export default function CubePanel({ config, onChange }: CubePanelProps) {
               display={config.scaleMult.toFixed(1) + '×'}
               onChange={set('scaleMult')}
             />
+            <div className="pt-1 border-t border-white/5">
+              <button
+                className={config.debug ? 'btn-primary w-full justify-center py-2 text-xs' : 'btn-outline w-full justify-center py-2 text-xs'}
+                onClick={() => onChange({ ...config, debug: !config.debug })}
+              >
+                Debug {config.debug ? 'ON' : 'OFF'}
+              </button>
+            </div>
           </div>
 
         </motion.div>
