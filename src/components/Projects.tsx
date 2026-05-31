@@ -28,11 +28,11 @@ export default function Projects() {
                 </a>
               </div>
 
-              <p className="text-sm text-muted leading-relaxed mb-5">{project.description}</p>
+              <p className="text-base text-muted leading-relaxed mb-5">{project.description}</p>
 
               <ul className="space-y-2.5 mb-5">
                 {project.bullets.map((bullet, j) => (
-                  <li key={j} className="flex gap-3 text-sm text-muted leading-relaxed">
+                  <li key={j} className="flex gap-3 text-base text-muted leading-relaxed">
                     <span className="text-accent mt-[3px] shrink-0 text-xs">▸</span>
                     <span>{bullet}</span>
                   </li>

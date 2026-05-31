@@ -22,8 +22,25 @@ export default function Hero() {
   return (
     <section id="about" className="min-h-screen flex flex-col justify-center px-6 pt-16">
       <div className="max-w-5xl mx-auto w-full">
-        <div className="grid md:grid-cols-[1fr_auto] gap-12 items-center">
-          <motion.div variants={container} initial="hidden" animate="show">
+        <div className="grid min-[870px]:grid-cols-[auto_1fr] gap-12 items-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.88 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.35, ease: EASE }}
+            className="hidden min-[870px]:flex justify-center"
+          >
+            <div
+              className="w-[14.5rem] h-[14.5rem] rounded-full overflow-hidden"
+              style={{
+                border: '2px solid rgba(255, 222, 89, 0.28)',
+                boxShadow: '0 0 48px rgba(255, 222, 89, 0.1)',
+              }}
+            >
+              <img src="/profile.jpg" alt="Hubert Mazur" className="w-full h-full object-cover" />
+            </div>
+          </motion.div>
+
+          <motion.div variants={container} initial="hidden" animate="show" className="justify-self-center max-w-full min-[870px]:justify-self-stretch">
             <motion.p
               variants={item}
               className="text-muted text-xs font-semibold tracking-[0.25em] uppercase mb-5"
@@ -33,7 +50,7 @@ export default function Hero() {
 
             <motion.h1
               variants={item}
-              className="text-6xl sm:text-7xl font-extrabold tracking-tight leading-[1.0] mb-3"
+              className="text-[4.125rem] sm:text-[4.95rem] font-extrabold tracking-tight leading-[1.0] mb-3 whitespace-nowrap"
             >
               Hubert{' '}
               <span
@@ -46,19 +63,19 @@ export default function Hero() {
 
             <motion.p
               variants={item}
-              className="text-xl sm:text-2xl text-muted font-light tracking-wide mb-6"
+              className="text-[1.375rem] sm:text-[1.65rem] text-muted font-light tracking-wide mb-6"
             >
               Software Engineer
               <span className="text-accent mx-3 font-normal">·</span>
-              Backend
+              Full Stack
             </motion.p>
 
             <motion.p
               variants={item}
-              className="text-muted text-sm leading-relaxed max-w-lg mb-9"
+              className="text-muted text-base leading-relaxed mb-9 text-justify max-w-[35rem]"
               style={{ lineHeight: '1.75' }}
             >
-              Backend engineer with 3.5 years of production experience building scalable services
+              Full-stack engineer with 3.5 years of production experience building scalable services
               in Java and Python. Currently pursuing an MSc in Software Engineering at UvA.
               I thrive in cross-functional teams on challenges that impact large user bases.
             </motion.p>
@@ -88,23 +105,6 @@ export default function Hero() {
               </a>
             </motion.div>
           </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.88 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.35, ease: EASE }}
-            className="hidden md:flex justify-center"
-          >
-            <div
-              className="w-52 h-52 rounded-full overflow-hidden"
-              style={{
-                border: '2px solid rgba(255, 222, 89, 0.28)',
-                boxShadow: '0 0 48px rgba(255, 222, 89, 0.1)',
-              }}
-            >
-              <img src="/profile.jpg" alt="Hubert Mazur" className="w-full h-full object-cover" />
-            </div>
-          </motion.div>
         </div>
 
         <motion.div
@@ -115,12 +115,12 @@ export default function Hero() {
         >
           <motion.a
             href="#experience"
-            className="text-muted/40 hover:text-muted/70 transition-colors"
+            className="text-accent/40 hover:text-accent transition-all duration-300 hover:drop-shadow-[0_0_10px_rgba(255,222,89,0.55)]"
             animate={{ y: [0, 7, 0] }}
             transition={{ repeat: Infinity, duration: 2.2, ease: 'easeInOut' }}
             aria-label="Scroll to experience"
           >
-            <ArrowDown size={20} />
+            <ArrowDown size={22} strokeWidth={2.5} />
           </motion.a>
         </motion.div>
       </div>

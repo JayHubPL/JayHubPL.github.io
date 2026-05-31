@@ -29,7 +29,7 @@ export default function Experience() {
 
               <ul className="space-y-2.5 mb-5">
                 {job.bullets.map((bullet, j) => (
-                  <li key={j} className="flex gap-3 text-sm text-muted leading-relaxed">
+                  <li key={j} className="flex gap-3 text-base text-muted leading-relaxed">
                     <span className="text-accent mt-[3px] shrink-0 text-xs">▸</span>
                     <span>{bullet}</span>
                   </li>
