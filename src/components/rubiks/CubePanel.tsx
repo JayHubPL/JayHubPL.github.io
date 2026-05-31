@@ -112,9 +112,6 @@ export default function CubePanel({ config, onChange }: CubePanelProps) {
             />
           </div>
 
-          <div className="mt-5 pt-4 border-t border-white/5 text-center">
-            <span className="text-xs text-muted opacity-40">press ` to toggle</span>
-          </div>
         </motion.div>
       )}
     </AnimatePresence>

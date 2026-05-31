@@ -31,7 +31,7 @@ export default function Background({ cubeConfig }: BackgroundProps) {
       <div className="bg-orb bg-orb-3" />
       <motion.div className="absolute inset-0" style={{ background: spotlight }} />
 
-      <div className="absolute inset-0" style={{ opacity: 0.55 }}>
+      <div className="absolute inset-0" style={{ opacity: 0.55, filter: 'blur(1.2px)' }}>
         <Suspense fallback={null}>
           <CubeScene
             count={cubeConfig.count}
