@@ -141,7 +141,8 @@ function PhysicsScene({
   }
 
   // Collision flash timers: body index → remaining seconds
-  const flashRef = useRef(new Map<number, number>())
+  const flashRef   = useRef(new Map<number, number>())
+  const debugCtxRef = useRef<CanvasRenderingContext2D | null>(null)
 
   // Rescale live velocities when speedMult changes
   useEffect(() => {
@@ -260,10 +261,12 @@ function PhysicsScene({
     if (!canvas) return
 
     if (canvas.width !== size.width || canvas.height !== size.height) {
-      canvas.width  = size.width
-      canvas.height = size.height
+      canvas.width    = size.width
+      canvas.height   = size.height
+      debugCtxRef.current = canvas.getContext('2d')  // re-acquire after resize
     }
-    const ctx = canvas.getContext('2d')
+    if (!debugCtxRef.current) debugCtxRef.current = canvas.getContext('2d')
+    const ctx = debugCtxRef.current
     if (!ctx) return
 
     // Tick flash timers

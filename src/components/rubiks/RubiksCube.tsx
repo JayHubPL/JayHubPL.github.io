@@ -2,6 +2,34 @@ import { useRef, useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 
+// ─── Shared resource cache ────────────────────────────────────────────────────
+// Geometry and materials are identical for all cubes with the same visual config.
+// Cache them at module scope so N cube instances share 4 GPU resources instead of 4N.
+
+type CubeletResources = {
+  boxGeo:   THREE.BoxGeometry
+  edgeGeo:  THREE.EdgesGeometry
+  blackMat: THREE.MeshBasicMaterial
+  edgeMat:  THREE.LineBasicMaterial
+}
+const _resourceCache = new Map<string, CubeletResources>()
+
+function getCubeletResources(cubeletSize: number, faceColor: string, edgeColor: string): CubeletResources {
+  const key = `${cubeletSize}|${faceColor}|${edgeColor}`
+  let res = _resourceCache.get(key)
+  if (!res) {
+    const bg = new THREE.BoxGeometry(cubeletSize, cubeletSize, cubeletSize)
+    res = {
+      boxGeo:   bg,
+      edgeGeo:  new THREE.EdgesGeometry(bg),
+      blackMat: new THREE.MeshBasicMaterial({ color: faceColor }),
+      edgeMat:  new THREE.LineBasicMaterial({ color: edgeColor }),
+    }
+    _resourceCache.set(key, res)
+  }
+  return res
+}
+
 // ─── Config ───────────────────────────────────────────────────────────────────
 
 export interface RubiksCubeConfig {
@@ -56,19 +84,18 @@ interface TwistState {
 // ─── RubiksCube ───────────────────────────────────────────────────────────────
 
 export default function RubiksCube({ config = DEFAULT_CONFIG }: { config?: RubiksCubeConfig }) {
-  const { boxGeo, edgeGeo, blackMat, edgeMat } = useMemo(() => {
-    const s = config.cubeletSize
-    const bg = new THREE.BoxGeometry(s, s, s)
-    return {
-      boxGeo: bg,
-      edgeGeo: new THREE.EdgesGeometry(bg),
-      blackMat: new THREE.MeshBasicMaterial({ color: config.faceColor }),
-      edgeMat: new THREE.LineBasicMaterial({ color: config.edgeColor }),
-    }
-  }, [config.cubeletSize, config.faceColor, config.edgeColor])
+  const { boxGeo, edgeGeo, blackMat, edgeMat } = useMemo(
+    () => getCubeletResources(config.cubeletSize, config.faceColor, config.edgeColor),
+    [config.cubeletSize, config.faceColor, config.edgeColor],
+  )
 
   // One Group ref per cubelet — all animation is direct THREE.js mutation, no React state
   const refs = useRef<(THREE.Group | null)[]>(Array(27).fill(null))
+  // Stable ref callbacks prevent React from re-running all 27 ref assignments on every re-render
+  const cubeletRefCbs = useMemo(
+    () => GRID_COORDS.map((_, i) => (el: THREE.Group | null) => { refs.current[i] = el }),
+    [],
+  )
 
   // Logical integer-grid positions, updated only when a twist completes
   const logPos = useRef(GRID_COORDS.map(([x, y, z]) => new THREE.Vector3(x, y, z)))
@@ -142,7 +169,7 @@ export default function RubiksCube({ config = DEFAULT_CONFIG }: { config?: Rubik
   return (
     <group>
       {GRID_COORDS.map(([x, y, z], i) => (
-        <group key={i} ref={el => { refs.current[i] = el }} position={[x, y, z]}>
+        <group key={i} ref={cubeletRefCbs[i]} position={[x, y, z]}>
           <mesh geometry={boxGeo} material={blackMat} />
           <lineSegments geometry={edgeGeo} material={edgeMat} />
         </group>
