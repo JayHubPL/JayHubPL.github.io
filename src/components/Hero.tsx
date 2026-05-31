@@ -1,5 +1,5 @@
 import { motion, type Variants } from 'framer-motion'
-import { Github, Linkedin, Download, ArrowDown } from 'lucide-react'
+import { Github, Linkedin, Download, ArrowDown, Mail } from 'lucide-react'
 import { contact } from '../data'
 
 const EASE: [number, number, number, number] = [0.21, 0.47, 0.32, 0.98]
@@ -22,12 +22,12 @@ export default function Hero() {
   return (
     <section id="about" className="min-h-screen flex flex-col justify-center px-6 pt-16">
       <div className="max-w-5xl mx-auto w-full">
-        <div className="grid min-[870px]:grid-cols-[auto_1fr] gap-12 items-center">
+        <div className="grid min-[930px]:grid-cols-[auto_1fr] gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.88 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.35, ease: EASE }}
-            className="hidden min-[870px]:flex justify-center"
+            className="hidden min-[930px]:flex justify-center"
           >
             <div
               className="w-[14.5rem] h-[14.5rem] rounded-full overflow-hidden"
@@ -40,7 +40,7 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          <motion.div variants={container} initial="hidden" animate="show" className="justify-self-center max-w-full min-[870px]:justify-self-stretch">
+          <motion.div variants={container} initial="hidden" animate="show" className="justify-self-center max-w-full min-[930px]:justify-self-stretch">
             <motion.p
               variants={item}
               className="text-muted text-xs font-semibold tracking-[0.25em] uppercase mb-5"
@@ -72,7 +72,7 @@ export default function Hero() {
 
             <motion.p
               variants={item}
-              className="text-muted text-base leading-relaxed mb-9 text-justify max-w-[35rem]"
+              className="text-muted text-base leading-relaxed mb-9 text-justify max-w-[37rem]"
               style={{ lineHeight: '1.75' }}
             >
               Full-stack engineer with 3.5 years of production experience building scalable services
@@ -102,6 +102,10 @@ export default function Hero() {
               >
                 <Linkedin size={15} />
                 LinkedIn
+              </a>
+              <a href="#contact" className="btn-outline">
+                <Mail size={15} />
+                Get in Touch
               </a>
             </motion.div>
           </motion.div>
