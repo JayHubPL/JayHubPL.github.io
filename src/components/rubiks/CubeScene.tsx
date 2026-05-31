@@ -1,44 +1,50 @@
 import { Canvas } from '@react-three/fiber'
 import { useMemo } from 'react'
-import FloatingCube, { type FloatingCubeProps } from './FloatingCube'
+import ShootingCube, { type ShootingCubeProps } from './ShootingCube'
 
-// Deterministic-ish seeded layout so cubes don't jump on remount
-function makeCubes(count: number): FloatingCubeProps[] {
-  const cubes: FloatingCubeProps[] = []
-  // Spread cubes across a wide viewport-like area (units map roughly to screen)
-  const xs = [-7, -4.5, -2, 0.5, 3, 5.5, 8, -6, 4]
-  const ys = [4, -3, 5.5, -5, 3, -1.5, 0, 1.5, -4]
+// Base values — multipliers from CubeConfig are applied at render time
+// so count changes recreate cubes, but multiplier changes only update props.
+interface BaseProps extends Omit<ShootingCubeProps, 'speed' | 'rotationSpeed' | 'scale'> {
+  baseSpeed: number
+  baseRotation: [number, number, number]
+  baseScale: number
+}
 
-  for (let i = 0; i < count; i++) {
-    const seed = i + 1
-    cubes.push({
-      position: [xs[i % xs.length], ys[i % ys.length], -2 - (seed % 3)],
-      scale: 0.28 + (seed % 5) * 0.04,
-      rotationSpeed: [
-        0.18 + (seed % 3) * 0.07,
-        0.22 + (seed % 4) * 0.06,
-        0.1  + (seed % 2) * 0.05,
-      ],
-      drift: [
-        0.35 + (seed % 3) * 0.1,
-        0.28 + (seed % 4) * 0.08,
-        0.18 + (seed % 5) * 0.03,
-        seed * 1.3,
-      ],
+function makeBaseCubes(count: number): BaseProps[] {
+  return Array.from({ length: count }, (_, i) => {
+    const s = i + 1
+    return {
+      baseScale: 0.056 + (s % 5) * 0.008,
+      baseSpeed: (1.4 + (s % 4) * 0.4) * 0.2,
+      baseRotation: [
+        (0.18 + (s % 3) * 0.07) * 1.2,
+        (0.22 + (s % 4) * 0.06) * 1.2,
+        (0.10 + (s % 2) * 0.05) * 1.2,
+      ] as [number, number, number],
+      initialDelay: i * 0.9,
       config: {
-        twistInterval: 1.8 + (seed % 5) * 0.5,
+        twistInterval: 1.2 + (s % 4) * 0.4,
+        twistDuration: 0.35,
       },
-    })
-  }
-  return cubes
+    }
+  })
 }
 
 export interface CubeSceneProps {
   count?: number
+  speedMult?: number
+  rotationMult?: number
+  scaleMult?: number
 }
 
-export default function CubeScene({ count = 8 }: CubeSceneProps) {
-  const cubes = useMemo(() => makeCubes(count), [count])
+export default function CubeScene({
+  count = 10,
+  speedMult = 1,
+  rotationMult = 1,
+  scaleMult = 1,
+}: CubeSceneProps) {
+  // Only recreates when count changes — multipliers applied below, not here
+  const bases = useMemo(() => makeBaseCubes(count), [count])
 
   return (
     <Canvas
@@ -47,8 +53,19 @@ export default function CubeScene({ count = 8 }: CubeSceneProps) {
       style={{ background: 'transparent' }}
       dpr={[1, 1.5]}
     >
-      {cubes.map((props, i) => (
-        <FloatingCube key={i} {...props} />
+      {bases.map((b, i) => (
+        <ShootingCube
+          key={i}
+          scale={b.baseScale * scaleMult}
+          speed={b.baseSpeed * speedMult}
+          rotationSpeed={[
+            b.baseRotation[0] * rotationMult,
+            b.baseRotation[1] * rotationMult,
+            b.baseRotation[2] * rotationMult,
+          ]}
+          initialDelay={b.initialDelay}
+          config={b.config}
+        />
       ))}
     </Canvas>
   )
