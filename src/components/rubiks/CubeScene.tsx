@@ -101,16 +101,17 @@ function drawDebug(
 // ─── Inner physics scene (must live inside Canvas) ────────────────────────────
 
 interface PhysicsSceneProps {
-  params:       CubeParam[]
-  speedMult:    number
-  rotationMult: number
-  scaleMult:    number
-  debug:        boolean
-  debugCanvas:  RefObject<HTMLCanvasElement | null>
+  params:        CubeParam[]
+  speedMult:     number
+  rotationMult:  number
+  scaleMult:     number
+  twistRateMult: number
+  debug:         boolean
+  debugCanvas:   RefObject<HTMLCanvasElement | null>
 }
 
 function PhysicsScene({
-  params, speedMult, rotationMult, scaleMult, debug, debugCanvas,
+  params, speedMult, rotationMult, scaleMult, twistRateMult, debug, debugCanvas,
 }: PhysicsSceneProps) {
   const groupRefs = useRef<(THREE.Group | null)[]>([])
 
@@ -282,7 +283,7 @@ function PhysicsScene({
           key={i}
           ref={refCallbacks[i]}
           scale={p.baseScale * scaleMult}
-          config={p.config}
+          config={{ ...p.config, twistInterval: p.config.twistInterval! / twistRateMult }}
         />
       ))}
     </>
@@ -292,19 +293,21 @@ function PhysicsScene({
 // ─── Public component ─────────────────────────────────────────────────────────
 
 export interface CubeSceneProps {
-  count?:        number
-  speedMult?:    number
-  rotationMult?: number
-  scaleMult?:    number
-  debug?:        boolean
+  count?:         number
+  speedMult?:     number
+  rotationMult?:  number
+  scaleMult?:     number
+  twistRateMult?: number
+  debug?:         boolean
 }
 
 export default function CubeScene({
-  count        = 10,
-  speedMult    = 1,
-  rotationMult = 1,
-  scaleMult    = 1,
-  debug        = false,
+  count         = 10,
+  speedMult     = 1,
+  rotationMult  = 1,
+  scaleMult     = 1,
+  twistRateMult = 1,
+  debug         = false,
 }: CubeSceneProps) {
   const params      = useMemo(() => makeParams(count), [count])
   const debugCanvas = useRef<HTMLCanvasElement>(null)
@@ -324,6 +327,7 @@ export default function CubeScene({
             speedMult={speedMult}
             rotationMult={rotationMult}
             scaleMult={scaleMult}
+            twistRateMult={twistRateMult}
             debug={debug}
             debugCanvas={debugCanvas}
           />

@@ -6,6 +6,7 @@ export interface CubeConfig {
   speedMult: number
   rotationMult: number
   scaleMult: number
+  twistRateMult: number
   debug: boolean
 }
 
@@ -14,6 +15,7 @@ export const DEFAULT_CUBE_CONFIG: CubeConfig = {
   speedMult: 1,
   rotationMult: 1,
   scaleMult: 1,
+  twistRateMult: 1,
   debug: false,
 }
 
@@ -111,6 +113,13 @@ export default function CubePanel({ config, onChange }: CubePanelProps) {
               min={0.2} max={5} step={0.1}
               display={config.scaleMult.toFixed(1) + '×'}
               onChange={set('scaleMult')}
+            />
+            <Slider
+              label="Turn Rate"
+              value={config.twistRateMult}
+              min={0.25} max={4} step={0.25}
+              display={config.twistRateMult.toFixed(2) + '×'}
+              onChange={set('twistRateMult')}
             />
             <div className="pt-1 border-t border-white/5">
               <button

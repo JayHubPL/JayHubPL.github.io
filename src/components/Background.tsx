@@ -38,6 +38,7 @@ export default function Background({ cubeConfig }: BackgroundProps) {
             speedMult={cubeConfig.speedMult}
             rotationMult={cubeConfig.rotationMult}
             scaleMult={cubeConfig.scaleMult}
+            twistRateMult={cubeConfig.twistRateMult}
             debug={cubeConfig.debug}
           />
         </Suspense>
