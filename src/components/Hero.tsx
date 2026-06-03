@@ -70,7 +70,7 @@ export default function Hero() {
               <span className="text-accent mx-3 font-normal">·</span>
               Full-Stack
               <span className="text-accent mx-3 font-normal">·</span>
-              <MapPin size={14} className="opacity-50 mr-1" />
+              <MapPin size={17} className="text-accent mr-1" />
               Amsterdam
             </motion.p>
 
