@@ -221,4 +221,72 @@ body {
     background: rgba(255, 222, 89, 0.06);
     transform: translateY(-2px);
   }
+
+  .core-card {
+    background: #111111;
+    border: 1px solid rgba(255, 222, 89, 0.18);
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+    padding: 18px 12px 14px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+  }
+
+  .core-card:hover {
+    border-color: rgba(255, 222, 89, 0.45);
+    box-shadow: 0 0 24px rgba(255, 222, 89, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .icon-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 7px;
+    padding: 4px 10px 4px 7px;
+    font-size: 0.74rem;
+    color: #999999;
+    transition: border-color 0.15s ease, color 0.15s ease;
+    white-space: nowrap;
+  }
+
+  .icon-tag:hover {
+    border-color: rgba(255, 222, 89, 0.18);
+    color: #cccccc;
+  }
+
+  .icon-tag-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 7px;
+    padding: 4px 10px;
+    font-size: 0.74rem;
+    color: #999999;
+    transition: border-color 0.15s ease, color 0.15s ease;
+    white-space: nowrap;
+  }
+
+  .icon-tag-text::before {
+    content: '·';
+    color: rgba(255, 222, 89, 0.35);
+    font-size: 0.85rem;
+    line-height: 1;
+  }
+
+  .icon-tag-text:hover {
+    border-color: rgba(255, 222, 89, 0.18);
+    color: #cccccc;
+  }
+
+  .icon-aura {
+    filter: drop-shadow(0 0 4px rgba(255, 222, 89, 0.55)) drop-shadow(0 0 2px rgba(255, 222, 89, 0.3));
+  }
 }
