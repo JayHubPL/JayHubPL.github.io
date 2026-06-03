@@ -1,6 +1,7 @@
 import { motion, type Variants } from 'framer-motion'
-import { Github, Linkedin, Download, ArrowDown, Mail } from 'lucide-react'
+import { Github, Linkedin, Download, ArrowDown, Mail, MapPin } from 'lucide-react'
 import { contact } from '../data'
+import TechBadge from './TechBadge'
 
 const EASE: [number, number, number, number] = [0.21, 0.47, 0.32, 0.98]
 
@@ -63,21 +64,27 @@ export default function Hero() {
 
             <motion.p
               variants={item}
-              className="text-[1.375rem] sm:text-[1.65rem] text-muted font-light tracking-wide mb-6"
+              className="text-[1.375rem] sm:text-[1.65rem] text-muted font-light tracking-wide mb-6 flex items-center gap-0 flex-wrap"
             >
               Software Engineer
               <span className="text-accent mx-3 font-normal">·</span>
-              Full Stack
+              Full-Stack
+              <span className="text-accent mx-3 font-normal">·</span>
+              <MapPin size={14} className="opacity-50 mr-1" />
+              Amsterdam
             </motion.p>
 
             <motion.p
               variants={item}
-              className="text-muted text-base leading-relaxed mb-9 text-justify max-w-[37rem]"
+              className="text-muted text-base leading-relaxed mb-9 max-w-[37rem]"
               style={{ lineHeight: '1.75' }}
             >
-              Full-stack engineer with 3.5 years of production experience building scalable services
-              in Java and Python. Currently pursuing an MSc in Software Engineering at UvA.
-              I thrive in cross-functional teams on challenges that impact large user bases.
+              Software Engineer with 3.5 years designing and shipping production systems. I work
+              primarily with <TechBadge icon="devicon-java-plain" name="Java" /> /{' '}
+              <TechBadge icon="devicon-spring-plain" name="Spring Boot" /> and{' '}
+              <TechBadge icon="devicon-angularjs-plain" name="Angular" />, building systems I can
+              be proud of alongside teams I learn from. Currently deepening that foundation through
+              an MSc at UvA.
             </motion.p>
 
             <motion.div variants={item} className="flex flex-wrap gap-3">
