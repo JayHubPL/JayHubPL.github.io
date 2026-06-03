@@ -1,3 +1,32 @@
+export type CoreSkill = {
+  name: string
+  icon: string
+  ctx: string
+  badge: string
+}
+
+export type SkillItem = {
+  name: string
+  icon: string | null
+  aura?: boolean
+}
+
+export type SkillGroup = {
+  category: string
+  items: SkillItem[]
+}
+
+export const coreSkills: CoreSkill[] = [
+  { name: 'Java',        icon: 'devicon-java-plain',       ctx: 'Microservices · SOLID',           badge: '3.5 yrs commercial' },
+  { name: 'Spring Boot', icon: 'devicon-spring-plain',     ctx: 'RESTful · WebSocket · Hibernate', badge: '3.5 yrs commercial' },
+  { name: 'Angular',     icon: 'devicon-angularjs-plain',  ctx: 'RxJS · NgRx · TypeScript',        badge: '1.5 yrs commercial' },
+  { name: 'TypeScript',  icon: 'devicon-typescript-plain', ctx: 'Strict · SDK design',             badge: 'Daily driver'       },
+  { name: 'PostgreSQL',  icon: 'devicon-postgresql-plain', ctx: 'Relational · Indexing · Queries', badge: 'Production'         },
+  { name: 'Docker',      icon: 'devicon-docker-plain',     ctx: 'Compose · Swarm · CI/CD',         badge: 'Production'         },
+  { name: 'Kubernetes',  icon: 'devicon-kubernetes-plain', ctx: 'Orchestration · Distributed',     badge: 'Production'         },
+  { name: 'Python',      icon: 'devicon-python-plain',     ctx: 'ML · Vertex AI · LangChain',      badge: 'AI / ML'            },
+]
+
 export const experience = [
   {
     title: 'Full-Stack Software Engineer',
@@ -69,26 +98,66 @@ export const projects = [
   },
 ]
 
-export const skills = [
+export const skills: SkillGroup[] = [
   {
     category: 'Backend',
-    items: ['Java', 'Spring Boot', 'Spring Framework', 'Python', 'Microservices', 'nginx', 'REST APIs'],
+    items: [
+      { name: 'Java',              icon: 'devicon-java-plain'           },
+      { name: 'Spring Boot',       icon: 'devicon-spring-plain'         },
+      { name: 'Python',            icon: 'devicon-python-plain'         },
+      { name: 'Hibernate',         icon: null                           },
+      { name: 'Querydsl',          icon: null                           },
+      { name: 'nginx',             icon: 'devicon-nginx-plain'          },
+      { name: 'REST APIs',         icon: null                           },
+      { name: 'WebSocket',         icon: null                           },
+      { name: 'Swagger / OpenAPI', icon: null                           },
+    ],
   },
   {
     category: 'Frontend',
-    items: ['Angular', 'React', 'TypeScript', 'HTML', 'CSS', 'Tailwind CSS', 'Vite'],
+    items: [
+      { name: 'Angular',      icon: 'devicon-angularjs-plain'   },
+      { name: 'React',        icon: 'devicon-react-original'    },
+      { name: 'TypeScript',   icon: 'devicon-typescript-plain'  },
+      { name: 'Tailwind CSS', icon: 'devicon-tailwindcss-plain' },
+      { name: 'Vite',         icon: 'devicon-vitejs-plain'      },
+      { name: 'HTML',         icon: 'devicon-html5-plain'       },
+      { name: 'CSS',          icon: 'devicon-css3-plain'        },
+    ],
   },
   {
     category: 'Databases',
-    items: ['PostgreSQL', 'MS SQL', 'MongoDB', 'Redis', 'Hibernate', 'Querydsl'],
+    items: [
+      { name: 'PostgreSQL', icon: 'devicon-postgresql-plain'              },
+      { name: 'MS SQL',     icon: 'devicon-microsoftsqlserver-plain'       },
+      { name: 'MongoDB',    icon: 'devicon-mongodb-plain'                 },
+      { name: 'Redis',      icon: 'devicon-redis-plain'                   },
+    ],
   },
   {
     category: 'DevOps & Cloud',
-    items: ['Docker', 'Kubernetes', 'AWS', 'Azure', 'GCloud', 'GitHub Actions', 'GitLab CI', 'Jenkins'],
+    items: [
+      { name: 'Docker',          icon: 'devicon-docker-plain'                    },
+      { name: 'Kubernetes',      icon: 'devicon-kubernetes-plain'                },
+      { name: 'Terraform',       icon: 'devicon-terraform-plain'                 },
+      { name: 'Ansible',         icon: 'devicon-ansible-plain',    aura: true    },
+      { name: 'AWS',             icon: 'devicon-amazonwebservices-plain-wordmark' },
+      { name: 'Azure',           icon: 'devicon-azure-plain'                     },
+      { name: 'GCloud',          icon: 'devicon-googlecloud-plain'               },
+      { name: 'GitHub Actions',  icon: 'devicon-github-original',  aura: true    },
+      { name: 'GitLab CI',       icon: null                                      },
+      { name: 'Jenkins',         icon: null                                      },
+    ],
   },
   {
     category: 'Other',
-    items: ['Git', 'WebSocket', 'JWT', 'Swagger / OpenAPI', 'Agile / Scrum', 'C++', 'Haskell', 'Rust'],
+    items: [
+      { name: 'Git',                icon: 'devicon-git-plain'       },
+      { name: 'Agile / Scrum / XP', icon: null                     },
+      { name: 'C++',                icon: 'devicon-cplusplus-plain' },
+      { name: 'Rust',               icon: 'devicon-rust-plain',     aura: true },
+      { name: 'Haskell',            icon: 'devicon-haskell-plain'  },
+    ],
   },
 ]
 
