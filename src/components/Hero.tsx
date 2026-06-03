@@ -81,7 +81,7 @@ export default function Hero() {
             >
               Software Engineer with 3.5 years designing and shipping production systems. I work
               primarily with <TechBadge icon="devicon-java-plain" name="Java" /> /{' '}
-              <TechBadge icon="devicon-spring-plain" name="Spring Boot" /> and{' '}
+              <TechBadge icon="devicon-spring-original" name="Spring Boot" /> and{' '}
               <TechBadge icon="devicon-angularjs-plain" name="Angular" />, building systems I can
               be proud of alongside teams I learn from. Currently deepening that foundation through
               an MSc at UvA.

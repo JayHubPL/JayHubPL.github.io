@@ -223,8 +223,8 @@ body {
   }
 
   .core-card {
-    background: #111111;
-    border: 1px solid rgba(255, 222, 89, 0.18);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 14px;
     display: flex;
     flex-direction: column;
@@ -232,13 +232,13 @@ body {
     gap: 8px;
     text-align: center;
     padding: 18px 12px 14px;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
   }
 
   .core-card:hover {
-    border-color: rgba(255, 222, 89, 0.45);
-    box-shadow: 0 0 24px rgba(255, 222, 89, 0.1);
-    transform: translateY(-2px);
+    background: rgba(255, 222, 89, 0.025);
+    border-color: rgba(255, 222, 89, 0.22);
+    box-shadow: 0 0 28px rgba(255, 222, 89, 0.06), 0 8px 32px rgba(0, 0, 0, 0.4);
   }
 
   .icon-tag {
